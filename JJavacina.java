@@ -1,11 +1,13 @@
-package Projeto_Generation_Bloco1;
+package br.com.generation.javacina;
 
+import java.awt.datatransfer.SystemFlavorMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class JJavacina {
 
 	public static void main(String[] args) {
-
+				
 				int laudov=0;
 				Scanner entrada = new Scanner(System.in);
 
@@ -16,19 +18,21 @@ public class JJavacina {
 				p.setnome(entrada.nextLine());
 				
 				while(p.getnome().length()<=2 || p.getnome().length()>=30) {
-					
+					System.out.println("-------------------------------------------------------");
 					System.out.println("Nome incorreto ");
 					System.out.println("Digite novamente");
 					p.setnome(entrada.nextLine());
 					
 					}
 				
-									
+					try {			
 				System.out.println("Digite sua idade: ");
 				p.setidade(entrada.nextInt());
 				
+				
+				
 				while(p.getidade()<0 ||p.getidade()>130) {
-					
+					System.out.println("-------------------------------------------------------");
 					System.out.println("Idade incorreta");
 					System.out.println("Digite novamente");
 					p.setidade(entrada.nextInt());
@@ -46,7 +50,7 @@ public class JJavacina {
 						System.out.println("Idade: " + ps.getidade());
 						System.out.println("-------------------------------------------------------");	
 						ps.setData(ps.getidade());
-						return;
+						System.exit(0);
 
 					}
 					if(p.getidade()<18) {
@@ -58,17 +62,22 @@ public class JJavacina {
 					System.out.println("Nome: " + ps.getnome());
 					System.out.println("Idade: " + ps.getidade());
 					ps.setData(ps.getidade());
-						return;
+						
+					System.exit(0);
 									}
-
+			
 				System.out.println("-------------------------------------------------------");	
 				System.out.println("\nDigite o número caso tenha alguma dessas comorbidades: ");
 				System.out.println();
 				System.out.println("1-Obesidade grau 3" + "\n" + "2-Diabetes" + "\n" + "3-Doença do coração " + "\n"
 						+ "4-Doença respiratória " + "\n" + "5-Caso tenha nehuma dessa opções \n");
-				p.setpresençadeComorbidade(entrada.nextInt());
-
-				while (p.getpresençadeComorbidade() < 1 || p.getpresençadeComorbidade() >=6 ) {
+			
+					
+					p.setpresençadeComorbidade(entrada.nextInt());	
+				
+					
+					while (p.getpresençadeComorbidade() < 1 || p.getpresençadeComorbidade() >=6 ) {
+					System.out.println("-------------------------------------------------------");
 					System.out.println("Comorbidade incorreta ");
 					System.out.println("Digite novamente");
 					p.setpresençadeComorbidade(entrada.nextInt());
@@ -86,14 +95,26 @@ public class JJavacina {
 					System.out.println("Idade: " + pc.getidade());
 					pc.setcomorbidade(p.getpresençadeComorbidade());
 
-				}  else if (p.getpresençadeComorbidade() == 5) {
+					}
+				
+			
+				
+				
+			   if (p.getpresençadeComorbidade() == 5) {
 					System.out.println("--------------------------------------------------------");	
 					System.out.println("Digite o número respectivo de sua complicação médica:");
 					System.out.println();
 					System.out.println("1-Voce toma algum remédio anticoagulante "+"\n"+"2-Voce tem alergia a algum componente da vacina"+"\n"+"3-nehuma das opções \n");
-						p.setComplicavacia(entrada.nextInt());
-						
-						
+					
+					p.setComplicavacia(entrada.nextInt());		
+					
+					while(p.getComplicavacia()<1||p.getComplicavacia()>3) {
+							System.out.println("Digito inválido ");
+							System.out.println("Digite novamente ");
+							System.out.println("--------------------------------------------------------");	
+							System.out.println("1-Voce toma algum remédio anticoagulante "+"\n"+"2-Voce tem alergia a algum componente da vacina"+"\n"+"3-nehuma das opções \n");
+							p.setComplicavacia(entrada.nextInt());
+						}
 				    if (p.getComplicavacia() == 3) {
 				    	
 						PessoassemComorbidade ps = new PessoassemComorbidade();
@@ -104,12 +125,28 @@ public class JJavacina {
 						System.out.println("Nome: " + ps.getnome());
 						System.out.println("Idade: " + ps.getidade());
 						ps.setData(ps.getidade());
-					}
+						}
+						
+						}
+						
+						laudov=entrada.nextInt();
 						
 						
-				
-					laudov=entrada.nextInt();
-					if(laudov==1) {
+						while(laudov<1||laudov>2) {
+						System.out.println("Digito inválido ");
+						System.out.println("Digite novamente ");
+						System.out.println("--------------------------------------------------------");	
+						System.out.println("\nVoce tem algum laudo medico confirmando a sua possibilidade de se vacinar?"+"\n"+"1-Sim"+"\n"+"2-Não \n");
+						
+						
+						
+						
+						laudov=entrada.nextInt();}
+					
+					
+						
+						
+						if(laudov==1) {
 						
 						PessoassemComorbidade ps = new PessoassemComorbidade();
 						ps.setnome(p.getnome());
@@ -119,16 +156,27 @@ public class JJavacina {
 						System.out.println("Nome: " + ps.getnome());
 						System.out.println("Idade: " + ps.getidade());
 						ps.setData(ps.getidade());
-					}
+							}
 						if(laudov==2) {
 							
 							System.out.println("-------------------------------------------------------");
 							System.out.println("infelizmente voce não poderá se vacinar.");
-						}
+							}
+						
+	
+					}
+						catch(InputMismatchException e) {
+						
+						System.out.println("Número inválido Caracters Não suportado pelo sistema");
+						System.out.println("Reinicie o Programa");
+						return;
+						
+					}
 					
 					
+					entrada.close();
 				}
-				entrada.close();
-			}
+				
+						}
 
-		}
+					
